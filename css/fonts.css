@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'fangzhengshuti';
+    src:url('../font/fangzhengshuti.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'kaiti';
+    src:url('../font/kaiti.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

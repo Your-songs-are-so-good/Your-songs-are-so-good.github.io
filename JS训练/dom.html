@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="gradeparent">
+        <div>
+            <div id="getTime"></div>
+            <div id="getDay"></div>
+        </div>
+    </div>
+
+
+    <script>
+        var div = document.querySelector('#gradeparent');
+        //父节点，子节点获取
+        console.dir(div.parentNode.firstElementChild);
+        // console.dir(div.parentNode.children);
+        //兄弟节点(分上下两个)
+        console.log(div.nextElementSibling);
+        console.log(div.previousElementSibling);
+        var time = document.createElement('li');
+        // 删除结点
+        document.removeChild('li');
+        div.removeChild();
+        //div.appendChild(time);    
+        div.insertBefore(time,div.firstElementChild);
+
+        </script>
+
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        div {
+            /* margin: 10px; */
+            padding: 10px;
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        /**
+         * 1.获取div初始位置
+         * 2.获取鼠标刚点击的位置
+         * 3.获取鼠标移动的位置（可以获取鼠标移动的距离），监听事件mousemove mouseup
+         * 4.更改div的top和left的属性值
+         */
+        var div = document.querySelector("div");
+
+        div.addEventListener("mousedown", function (e) {
+            var x = e.pageX - div.offsetLeft;
+            var y = e.pageY - div.offsetTop;
+            // var x = e.pageX - div.clientLeft;
+            // var y = e.pageY - div.clientTop;
+            // var x = e.offsetX;
+            // var y = e.offsetY;
+            // console.log('e.offsetX: ', e.offsetX);
+            // console.log('e.offsetY: ', e.offsetY);
+            document.addEventListener("mousemove", mouseMove);
+
+            function mouseMove(e) {
+                div.style.left =  e.pageX - x + "px";
+                div.style.top =  e.pageY - y + "px";
+                // console.log('e.pageX - x + "px": ', e.pageX - x + "px");
+                // console.log('e.pageY - y + "px": ', e.pageY - y + "px");
+            }
+
+            document.addEventListener("mouseup", function () {
+                document.removeEventListener("mousemove", mouseMove);
+            });
+        });
+
+    </script>
+</body>
+
+</html>

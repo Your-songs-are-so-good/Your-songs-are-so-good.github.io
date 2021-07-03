@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td>全选<input type="checkbox" name="ck_all" id="ck_all"></td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" name="ck" class="ck"></td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" name="ck" class="ck"></td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" name="ck" class="ck"></td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" name="ck" class="ck"></td>
+        </tr>
+    </table>
+
+    <script>
+        var ck_all = document.querySelector('#ck_all');
+        var cks = document.querySelectorAll('.ck');
+        ck_all.addEventListener('click', () => {
+            for (let i = 0; i < cks.length; i++) {
+                cks[i].checked = ck_all.checked;
+            }
+        });
+
+        for (let i = 0; i < cks.length; i++) {
+            cks[i].addEventListener('click', () => {
+                let flag = true;
+                for (let j = 0; j < cks.length; j++) {
+                    if (!cks[j].checked) {
+                        flag = false;
+                    }
+                }
+                ck_all.checked = flag;
+            });
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>键盘控制图片移动</title>
+    <style>
+        img {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="beat2.jpg">
+    <script>
+        var img = document.querySelector('img');
+        var x = 0;
+        var y = 0;
+        //有三种类型keyup keydown keypress
+        document.addEventListener('keydown', function (evt) {
+            //w:87 A:65 S:83 D:68
+            switch (evt.keyCode) {
+                case 87:
+                    y = y - 10;
+                    img.style.top = y + 'px';
+                    break;
+                case 65:
+                    x = x - 10;
+                    img.style.left = x + 'px';
+                    break;
+                case 83:
+                    y = y + 10;
+                    img.style.top = y + 'px';
+                    break;
+                case 68:
+                    x = x + 10;
+                    img.style.left = x + 'px';
+                    break;
+                default:
+                    break;
+            }
+        });
+    </script>
+</body>
+
+</html>

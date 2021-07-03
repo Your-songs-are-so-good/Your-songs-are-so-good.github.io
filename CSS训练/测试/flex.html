@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flex布局测试</title>
+    <style>
+        * {
+            outline: 1px solid #0000ff;
+            --my-color:yellow;
+            --height-body:100px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .HolyGrail {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .HolyGrail>:first-child{
+            margin: 10px;
+        }
+
+        .HolyGrail>:nth-child(2) {
+            display: flex;
+            flex-grow: 1;
+        }
+        .HolyGrail>:last-child{
+            height: 50px;
+        }
+        .HolyGrail-body {
+            background-color: var(--my-color);
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="HolyGrail">
+        <header>头部</header>
+        <div class="HolyGrail-body">
+            <main class="HolyGrail-content">内容</main>
+            <nav class="HolyGrail-nav">目录</nav>
+            <aside class="HolyGrail-ads">广告</aside>
+        </div>
+        <footer>尾部</footer>
+    </div>
+    <script>
+        var bgc = document.querySelector('.HolyGrail-body');
+        bgc.style.setProperty('--my-color','red');
+        // // //clientHeight: 191
+        // var heights = document.documentElement.clientHeight + 'px';
+        // document.querySelector('.HolyGrail>:nth-child(2)').style.setProperty('--height-body',heights);
+    </script>
+</body>
+
+</html>
+
+<!-- container:
+flex-direction
+flex-wrap
+justify-content
+align-items
+align-content
+
+items:
+order
+flex-basis
+align-self
+flex-grow
+flex-shrink
+flex -->

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>删除留言</title>
+    <style>
+
+        body {
+            padding: 0;
+            margin: 0;
+            /* height: 100vh; */
+        }
+
+        .box {
+            margin: 100px auto;
+            width: 400px;
+            height: 100%;
+            --box-shadow1: 5px 5px 15px rgb(226, 226, 226);
+        }
+
+        .liuyan {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .liuyan textarea {
+            flex-grow: 1;
+            resize: none;
+            outline: none;
+            border-radius: 5px;
+            border: 1px solid rgb(196, 196, 196);
+            box-shadow: var(--box-shadow1);
+            background-color: rgb(240, 240, 240);
+            padding: 5px 10px;
+            font-size: 12px;
+            color: rgb(112, 112, 112);
+        }
+
+        .liuyan textarea:focus {
+            flex-grow: 1;
+            resize: none;
+            outline: none;
+            border-radius: 5px;
+            border: 1px solid rgb(8, 223, 238);
+            box-shadow: var(--box-shadow1);
+            background-color: rgb(240, 240, 240);
+            padding: 5px 10px;
+            font-size: 12px;
+            color: rgb(112, 112, 112);
+        }
+
+
+
+        .liuyan button {
+            margin-left: 10px;
+            border-radius: 5px;
+            border: 1px solid rgb(196, 196, 196);
+            box-shadow: var(--box-shadow1);
+            width: 50px;
+            background-color: rgb(49, 179, 255);
+            color: #fff;
+        }
+
+
+        li {
+            list-style-type: none;
+            height: 30px;
+            font-size: 20px;
+            line-height: 30px;
+            margin: 10px auto;
+            margin-left: -40px;
+            background-color: rgb(238, 238, 238);
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 5px 5px 15px rgb(226, 226, 226);
+        }
+
+        a {
+            float: right;
+            margin-right: 10px;
+            text-decoration: none;
+            font-size: 16px;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="liuyan">
+            <textarea name="" id="" cols="30" rows="2" placeholder="发一条友善的评论"></textarea>
+            <button>发表评论</button>
+        </div>
+
+        <ul class="liuyanqu">
+        </ul>
+    </div>
+
+    <script>
+        var textarea = document.querySelector('textarea');
+        var button = document.querySelector('button');
+        var ul = document.querySelector('ul');
+
+        button.addEventListener('click',()=>{
+            var li = document.createElement('li');
+            if (textarea.value == '') {
+                alert('内容不能为空');
+                return false;
+            } else {
+                var text = textarea.value;
+                textarea.value = '';
+                li.innerHTML = text + '<a href="javascript:void(0);">删除</a>';
+                ul.appendChild(li);
+                document.querySelector('a').onclick = function () {
+                    // alert('是否要删除这条评论');
+                    this.parentNode.remove();
+                }
+                var as = document.querySelectorAll('a');
+                for (var i = 0; i < as.length; i++) {
+                    as[i].onclick = function () {
+                        this.parentNode.remove();
+                    }
+                }
+            }
+        });
+
+        textarea.addEventListener('mouseenter',()=>{
+            textarea.focus();
+        });
+
+        textarea.addEventListener('mouseleave',()=>{
+            textarea.blur();
+        });
+
+        button.addEventListener('mouseenter',()=>{
+            textarea.focus();
+        });
+
+        button.addEventListener('mouseleave',()=>{
+            textarea.blur();
+        });
+
+
+    </script>
+</body>
+
+</html>

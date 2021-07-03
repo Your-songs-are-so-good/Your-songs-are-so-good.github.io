@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>返回顶部</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            height: 10000px;
+        }
+
+        body {
+            background-color: #000;
+        }
+
+        /* .box {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(34, 174, 255, 0.932);
+            background-color: rgba(3, 141, 221, 0.932);
+            box-shadow: 10px 10px 20px rgba(114, 114, 114, 0.281);
+            border-radius: 50%;
+
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            cursor: pointer;
+        }
+
+        span {
+            padding: 5px;
+            display: block;
+            text-align: center;
+            line-height: 50px;
+            font-size: 40px;
+            font-family: Arial, Helvetica, sans-serif;
+            color: rgba(252, 252, 252, 0.842);
+        } */
+    </style>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <!-- <div class="box" style="display:none;"><span>^</span></div> -->
+    <script>
+        $(function () {
+            $("body").append($("<div></div>").css({
+                "display": "none",
+                "width": "50px",
+                "height": "50px",
+                "background-color": "rgba(34, 174, 255, 0.932)",
+                "box-shadow": "10px 10px 20px rgba(114, 114, 114, 0.281)",
+                "border-radius": "50%",
+                "position": "fixed",
+                "bottom": "100px",
+                "right": "30px",
+                "cursor": "pointer",
+                "z-index": "999"
+            }).addClass("box").append($("<span></span>").css({
+                "padding": "5px",
+                "display": "block",
+                "text-align": "center",
+                "line-height": "50px",
+                "font-size": "40px",
+                "font-family": "Arial, Helvetica, sans-serif",
+                "color": "rgba(252, 252, 252, 0.842)"
+            }).html("^")))
+
+            var bounceEaseOut = makeEaseOut(bounce);
+            var flag = true;
+
+            $(".box").on({
+                "mouseenter": function () {
+                    $(".box").css("background-color", "rgba(3, 141, 221, 0.932)");
+                },
+                "mouseleave": function () {
+                    $(".box").css("background-color", "rgba(34, 174, 255, 0.932)");
+                },
+                "click": function () {
+                    var height = $(window).scrollTop();
+                    animate({
+                        duration: 500,
+                        timing: function back(x, timeFraction) {
+                            return Math.pow(timeFraction, 2) * ((x + 1) * timeFraction - x)
+                        }.bind(null, 1.5),
+                        draw: function (progress) {
+                            $(window).scrollTop(height - progress * height);
+                        }
+                    });
+                }
+            });
+
+            $(window).on({
+                "load resize": function () {
+                    $(".box").css("bottom", $(this).height() * .2 + "px");
+                },
+                "scroll": function () {
+                    if ($(this).scrollTop() >= $(this).height() * .3) {
+                        if (flag) {
+                            $(".box").show();
+                            animate({
+                                duration: 500,
+                                timing: bounceEaseOut,
+                                draw: function (progress) {
+                                    $(".box").css("right", progress * 30 + 'px');
+                                }
+                            });
+                            flag = false;
+                        }
+                    } else {
+                        if (flag == false) {
+                            animate({
+                                duration: 200,
+                                timing: function (timeFraction) {
+                                    return timeFraction;
+                                },
+                                draw: function (progress) {
+                                    $(".box").css("right", (1 - progress) * 30 + 'px');
+                                    if ($(".box").css("right") == "0px")
+                                        $(".box").hide();
+                                }
+                            });
+                        }
+                        flag = true;
+                    }
+                }
+            });
+
+            function makeEaseOut(timing) {
+                return function (timeFraction) {
+                    return 1 - timing(1 - timeFraction);
+                }
+            }
+
+            function bounce(timeFraction) {
+                for (let a = 0, b = 1, result; 1; a += b, b /= 2) {
+                    if (timeFraction >= (7 - 4 * a) / 11) {
+                        return -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2)
+                    }
+                }
+            }
+
+            function animate(options) {
+                var start = performance.now();
+                requestAnimationFrame(function animate(time) {
+                    var timeFraction = (time - start) / options.duration;
+                    if (timeFraction > 1) timeFraction = 1;
+                    var progress = options.timing(timeFraction)
+                    options.draw(progress);
+                    if (timeFraction < 1) {
+                        requestAnimationFrame(animate);
+                    }
+                });
+            }
+        })
+    </script>
+</body>
+
+</html>

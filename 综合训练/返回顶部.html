@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>返回顶部</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            height: 10000px;
+        }
+
+        body {
+            background-color: #000;
+        }
+
+        .box {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(34, 174, 255, 0.932);
+            /* background-color: rgba(3, 141, 221, 0.932); */
+            box-shadow: 10px 10px 20px rgba(114, 114, 114, 0.281);
+            border-radius: 50%;
+
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            cursor: pointer;
+        }
+
+        span {
+            padding: 5px;
+            display: block;
+            text-align: center;
+            line-height: 50px;
+            font-size: 40px;
+            font-family: Arial, Helvetica, sans-serif;
+            color: rgba(252, 252, 252, 0.842);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box" style="display:none;"><span>^</span></div>
+    <script>
+        // var divcss = {
+        //     "display":"none",
+        //     "width": "50px",
+        //     "height": "50px",
+        //     "background-color": "rgba(34, 174, 255, 0.932)",
+        //     "box-shadow": "10px 10px 20px rgba(114, 114, 114, 0.281)",
+        //     "border-radius": "50%",
+        //     "position": "fixed",
+        //     "bottom": "100px",
+        //     "right": "30px",
+        //     "cursor": "pointer",
+        //     "z-index":"999"
+        // }
+        // var spancss = {
+        //     "padding": "5px",
+        //     "display": "block",
+        //     "text-align": "center",
+        //     "line-height": "50px",
+        //     "font-size": "40px",
+        //     "font-family": "Arial, Helvetica, sans-serif",
+        //     "color": "rgba(252, 252, 252, 0.842)"
+        // }
+        // var div = document.createElement("div");
+        // var span = document.createElement("span");
+        // div.className = "box";
+        // span.innerHTML = "^";
+        // for(let i in spancss) {
+        //     span.style[i] = spancss[i];
+        // }
+        // for(let i in divcss) {
+        //     div.style[i] = divcss[i];
+        // }
+        // div.appendChild(span);
+        // document.body.appendChild(div);
+
+        var box = document.querySelector(".box");
+        let bounceEaseOut = makeEaseOut(bounce);
+        var flag = true;
+
+        box.addEventListener("mouseenter", evt => {
+            box.style.backgroundColor = "rgba(3, 141, 221, 0.932)";
+        })
+        box.addEventListener("mouseleave", evt => {
+            box.style.backgroundColor = "rgba(34, 174, 255, 0.932)";
+        })
+
+        window.addEventListener("load", evt => {
+            box.style.bottom = window.innerHeight * .2 + "px";
+        });
+        window.addEventListener("resize", evt => {
+            box.style.bottom = window.innerHeight * .2 + "px";
+        })
+
+        window.addEventListener("scroll", evt => {
+            if (window.pageYOffset >= window.innerHeight * .3) {
+                if (flag) {
+                    box.style.display = "block";
+                    animate({
+                        duration: 500,
+                        timing: bounceEaseOut,
+                        draw: function (progress) {
+                            box.style.right = progress * 30 + 'px';
+                        }
+                    });
+                    flag = false;
+                }
+            } else {
+                if (flag == false) {
+                    animate({
+                        duration: 200,
+                        timing: function (timeFraction) {
+                            return timeFraction;
+                        },
+                        draw: function (progress) {
+                            box.style.right = (1 - progress) * 30 + 'px';
+                            if (box.style.right == "0px") {
+                                box.style.display = "none";
+                            }
+                        }
+                    });
+                }
+                flag = true;
+            }
+        });
+
+
+        box.addEventListener("click", evt => {
+            var height = window.pageYOffset;
+            animate({
+                duration: 500,
+                timing: function back(x, timeFraction) {
+                    return Math.pow(timeFraction, 2) * ((x + 1) * timeFraction - x)
+                }.bind(null, 1.5),
+                draw: function (progress) {
+                    window.scroll(0, (height - progress * height));
+                }
+            });
+        });
+
+        function makeEaseOut(timing) {
+            return function (timeFraction) {
+                return 1 - timing(1 - timeFraction);
+            }
+        }
+
+        function bounce(timeFraction) {
+            for (let a = 0, b = 1, result; 1; a += b, b /= 2) {
+                if (timeFraction >= (7 - 4 * a) / 11) {
+                    return -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2)
+                }
+            }
+        }
+
+        function animate(options) {
+            var start = performance.now();
+            requestAnimationFrame(function animate(time) {
+                var timeFraction = (time - start) / options.duration;
+                if (timeFraction > 1) timeFraction = 1;
+                var progress = options.timing(timeFraction)
+                options.draw(progress);
+                if (timeFraction < 1) {
+                    requestAnimationFrame(animate);
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正则表达式测试</title>
+</head>
+<body>
+    <script>
+        var data = ['abc.pdf','bcd.pdf','cde.Pdf','123.pdf'];
+        /*零宽度断言*/
+        // 1.正先行断言(采用i可以忽略大小写)
+        var reg1 = /^\w+(?=\.pdf)/;
+        for(let i = 0; i < data.length; i++) {
+            console.log(data[i]+' : '+reg1.test(data[i]));
+        }
+        //2.负先行断言
+        var reg2 = /^\w{3}(?!\.pdf)/;
+        for(let i = 0; i < data.length; i++) {
+            console.log(data[i]+' : '+reg2.test(data[i]));
+        }
+    </script>
+</body>
+</html>

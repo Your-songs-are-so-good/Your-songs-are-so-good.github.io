@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高考倒计时</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            /* 可视区居中 */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: #000;
+        }
+
+        @keyframes animation-before {
+            0% {
+                clip-path: inset(0 0 0 0);
+            }
+
+            5% {
+                clip-path: inset(.8em 0 .4em 0);
+            }
+
+            10% {
+                clip-path: inset(.4em 0 .8em 0);
+            }
+
+            15% {
+                clip-path: inset(.1em 0 1em 0);
+            }
+
+            20% {
+                clip-path: inset(.3em 0 .6em 0);
+            }
+
+            25% {
+                clip-path: inset(.6em 0 .3em 0);
+            }
+
+            30% {
+                clip-path: inset(.8em 0 .5em 0);
+            }
+
+            35% {
+                clip-path: inset(1em 0 .1em 0);
+            }
+
+            40% {
+                clip-path: inset(.7em 0 .35em 0);
+            }
+
+            45% {
+                clip-path: inset(.5em 0 .2em 0);
+            }
+
+            50% {
+                clip-path: inset(.2em 0 .5em 0);
+            }
+
+            55% {
+                clip-path: inset(.35em 0 .7em 0);
+            }
+
+            60% {
+                clip-path: inset(.1em 0 .9em 0);
+            }
+
+            65% {
+                clip-path: inset(.8em 0 .46em 0);
+            }
+
+            70% {
+                clip-path: inset(.66em 0 .33em 0);
+            }
+
+            75% {
+                clip-path: inset(.48em 0 .23em 0);
+            }
+
+            80% {
+                clip-path: inset(.23em 0 .48em 0);
+            }
+
+            85% {
+                clip-path: inset(.39em 0 .79em 0);
+            }
+
+            90% {
+                clip-path: inset(.33em 0 .66em 0);
+            }
+
+            95% {
+                clip-path: inset(1em 0 .3em 0);
+            }
+
+            100% {
+                clip-path: inset(.62em 0 .29em 0);
+            }
+        }
+
+        @keyframes animation-after {
+            0% {
+                clip-path: inset(0 0 0 0);
+            }
+
+            5% {
+                clip-path: inset(.4em 0 .8em 0);
+            }
+
+            10% {
+                clip-path: inset(.8em 0 .4em 0);
+            }
+
+            15% {
+                clip-path: inset(1em 0 .1em 0);
+            }
+
+            20% {
+                clip-path: inset(.6em 0 .3em 0);
+            }
+
+            25% {
+                clip-path: inset(.3em 0 .6em 0);
+            }
+
+            30% {
+                clip-path: inset(1em 0 .1em 0);
+            }
+
+            35% {
+                clip-path: inset(.8em 0 .5em 0);
+            }
+
+            40% {
+                clip-path: inset(.35em 0 .7em 0);
+            }
+
+            45% {
+                clip-path: inset(.2em 0 .5em 0);
+            }
+
+            50% {
+                clip-path: inset(.5em 0 .2em 0);
+            }
+
+            55% {
+                clip-path: inset(.7em 0 .35em 0);
+            }
+
+            60% {
+                clip-path: inset(.9em 0 .1em 0);
+            }
+
+            65% {
+                clip-path: inset(.46em 0 .8em 0);
+            }
+
+            70% {
+                clip-path: inset(.33em 0 .66em 0);
+            }
+
+            75% {
+                clip-path: inset(.23em 0 .48em 0);
+            }
+
+            80% {
+                clip-path: inset(.48em 0 .23em 0);
+            }
+
+            85% {
+                clip-path: inset(.79em 0 .39em 0);
+            }
+
+            90% {
+                clip-path: inset(.66em 0 .33em 0);
+            }
+
+            95% {
+                clip-path: inset(.3em 0 1em 0);
+            }
+
+            100% {
+                clip-path: inset(.29em 0 .62em 0);
+            }
+        }
+
+        .calendar {
+            font-size: 48px;
+            font-weight: 600;
+            padding: 0 4px;
+            color: white;
+            font-family: 'kaiti';
+            text-shadow: 0 0 5px white, 0 0 10px #00FFFF, 0 0 15px #7FFF00, 0 0 20px white;
+        }
+
+        .txt {
+            text-shadow: initial;
+            font-size: 92px;
+            display: inline-block;
+            font-weight: 600;
+            padding: 0 4px;
+            color: white;
+            position: relative;
+        }
+
+        .txt::before {
+            content: attr(data-text);
+            position: absolute;
+            left: -1px;
+            width: 100%;
+            background-color: #000;
+            text-shadow: 2px 0 red;
+            animation: animation-before 4s infinite linear alternate-reverse;
+        }
+
+        .txt::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 1px;
+            width: 100%;
+            background-color: #000;
+            text-shadow: -2px 0 blue;
+            animation: animation-after 4s infinite linear alternate-reverse;
+        }
+
+        .countdown {
+            display: inline-block;
+            font-size: 24px;
+            color: white;
+            text-shadow: 2px 2px 1px red, -2px -2px 1px blue, 0 0 10px rgb(173, 252, 69), 0 0 20px rgb(173, 252, 69);
+            position: relative;
+            /* animation: animation-before 8s 0s infinite linear alternate-reverse; */
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="calendar">距<span>高考</span>还有<div class="txt"></div>天</div>
+    <div class="countdown">倒计时 <span id="day"></span> 天 <span id="hour"></span> 时 <span id="minute"></span> 分 <span
+            id="second"></span> 秒 </div>
+    <script>
+        var gaokao = new Date('2021-06-07 09:00:00').getTime();
+        var current = new Date().getTime();
+
+        var daytime = 60 * 60 * 24 * 1000;
+        var hourtime = 60 * 60 * 1000;
+        var minutetime = 60 * 1000;
+        var secondtime = 1000;
+
+        var day, hours, hour, minute, minutes, second, seconds;
+
+        countdown(new Date().getTime());
+
+        setInterval(function () {
+            countdown(new Date().getTime());
+        }, 1000);
+
+        function countdown(time) {
+            if (gaokao - current <= 0) {
+                gaokao = new Date((new Date().getFullYear() + 1) + '-06-07 09:00:00').getTime();
+            }
+            //获取天数
+            day = parseInt((gaokao - time) / daytime);
+            //获取小时
+            hours = (gaokao - time) % daytime;
+            hour = parseInt(hours / hourtime);
+            //获取分钟
+            minutes = hours % hourtime;
+            minute = parseInt(minutes / minutetime);
+            //获取秒
+            seconds = minutes % minutetime;
+            second = parseInt(seconds / secondtime);
+
+            // document.querySelector('.countdown').setAttribute('data-text', document.querySelector('.countdown').innerText);
+            document.querySelector('.txt').innerHTML = hour < 9 ? day : day + 1;
+            document.querySelector('.txt').setAttribute('data-text', hour < 9 ? day : day + 1);
+            document.querySelector('#day').innerHTML = day;
+            document.querySelector('#hour').innerHTML = hour;
+            document.querySelector('#minute').innerHTML = minute;
+            document.querySelector('#second').innerHTML = second;
+        }
+    </script>
+</body>
+
+</html>

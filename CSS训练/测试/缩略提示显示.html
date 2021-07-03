@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>缩略提示显示</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            /* outline: 1px solid #00f; */
+        }
+
+        body {
+            background-image: url(/img/bgi.jpg);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .bloglists {
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        .bloglists li {
+            list-style: none;
+            padding: 10px;
+            margin: 10px;
+            background-color: rgb(255, 255, 255);
+            border-radius: 5px;
+        }
+
+        .bloglists .title {
+            font-size: 16px;
+            height: 32px;
+            padding: 5px;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(121, 121, 121, 0.795);
+        }
+
+        .bloglists .title .txt {
+            line-height: 1.5em;
+            max-height: 3em;
+        }
+
+        .bloglists .title .txttip {
+            position: relative;
+            line-height: 1.5em;
+            top: -3em;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            background-color: rgb(255, 255, 255);
+        }
+
+        .bloglists .content p {
+            display: -webkit-box;
+            -moz-line-clamp: 3;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            line-height: 1.5em;
+            margin: 5px;
+            overflow: hidden;
+            white-space: pre-line;
+        }
+
+        .bloglists .view {
+            border-top: 1px solid rgba(170, 170, 170, 0.795);
+            padding: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bloglists">
+        <ul>
+            <li>
+                <div>
+                    <div class="title">
+                        <h2 class="txt">前女友婚礼，python破解婚礼现场的WIFI，把名称改成了</h2>
+                        <h2 class="txttip" title="前女友婚礼，python破解婚礼现场的WIFI，把名称改成了">前女友婚礼，python破解婚礼现场的WIFI，把名称改成了</h2>
+                    </div>
+                    <div class="content">
+                        <p>大家好，我是Lex 喜欢欺负超人那个Lex擅长领域：python开发、网络安全渗透、Windows域控Exchange架构今日重点：① python暴力拿下WiFi密码；②python拿下路由器管理页面代码干货满满，建议收藏+实操！！！有问题及需要，请留言哦~~
+                        </p><img src="" alt="">
+                    </div>
+                    <div class="view">
+                        <span>观看人数 <b>23</b></span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <div class="title">
+                        <h2 class="txt">学姐今天竟然问我【Linux中如何使用docker安装mysql】</h2>
+                        <h2 class="txttip" title="学姐今天竟然问我【Linux中如何使用docker安装mysql】">学姐今天竟然问我【Linux中如何使用docker安装mysql】
+                        </h2>
+                    </div>
+                    <div class="content">
+                        <p>Linux中使用docker安装mysql
+                            安装docker
+                            安装步骤
+                            1、安装一些必要的系统工具
+                            2、添加软件源信息
+                            3、更新并安装 Docker-CE
+                            4、开启Docker服务
+                            安装校验
+                            安装mysql
+                            拉取mysql的镜像
+                            查看下是否拉取成功
+                            配置mysql
+                            查看配置信息
+                            测试连接mysql
+                            先查看下虚拟机ip
+                            使用SQLyog连接Linux中的mysql
+                        </p><img src="" alt="">
+                    </div>
+                    <div class="view">
+                        <span>观看人数 <b>230</b></span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>

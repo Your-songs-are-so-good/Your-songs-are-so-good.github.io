@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>密码框显示隐藏实现</title>
+    <style>
+        .box {
+            position: relative;
+            width: 400px;
+            height: 30px;
+            margin: 100px auto;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .box label,
+        .box label img {
+            position: absolute;
+            top: 0px;
+            right: 5px;
+            width: 25px;
+        }
+
+        .box input {
+            width: 370px;
+            font-size: 18px;
+            border: 0;
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <label for="password"><img src="close.png" alt=""></label>
+        <input type="password" name="password" id="password">
+    </div>
+
+    <script>
+        var label = document.querySelector('.box label');
+        var input = document.querySelector('.box input');
+        var flag = 0;
+        label.addEventListener('click',function(){
+            if(flag == 0){
+                input.type = "text";
+                label.firstElementChild.src = "open.png";
+                input.focus();
+                flag = 1;
+            }else{
+                input.type = "password";
+                label.firstElementChild.src = "close.png";
+                input.focus();
+                flag = 0;
+            }
+        });
+    </script>
+</body>
+
+</html>

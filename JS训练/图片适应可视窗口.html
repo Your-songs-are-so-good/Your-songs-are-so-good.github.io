@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片适应可视窗口</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            display: block;
+            background-image: url(../img/bgi.jpg);
+            background-repeat: no-repeat;
+            background-position: center top;
+            background-size: cover;
+            width: 100%;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        var bg = document.querySelector('div');
+        window.addEventListener('load',function(){
+            bg.style.height = document.documentElement.clientHeight + 'px';
+        },false);
+        window.addEventListener('resize',function(){
+            bg.style.height = document.documentElement.clientHeight + 'px';
+        },false);
+    </script>
+</body>
+</html>
